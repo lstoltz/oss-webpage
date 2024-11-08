@@ -1,0 +1,69 @@
+/* Reset body margins and paddings */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+    font-family: Arial, sans-serif;
+}
+
+/* Container to hold the video background */
+.video-container {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -1;
+}
+
+/* Styling the video for parallax effect */
+.video-container video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%) scale(0.8); /* scale(1) shows full video */
+    object-fit: contain; /* Avoids cropping */
+    z-index: -1;
+    opacity: 0.75; /* Optional, for a darker effect */
+}
+
+
+/* Content overlay */
+.content {
+    position: relative;
+    z-index: 1;
+    padding: 50px;
+    color: #fff;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Scrollable section with content */
+.section {
+    padding: 100px 20px;
+    text-align: center;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Fixed, centered overlay text */
+.overlay-text {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    z-index: 1;
+}
+
+/* Header text style */
+.overlay-text h1 {
+    font-size: 4rem; /* Adjust for desired size */
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    margin: 0;
+}
