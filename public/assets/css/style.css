@@ -61,7 +61,7 @@
 
 /* Parallax background */
 .parallax {
-    background-image: url('/assets/images/trawler.jpg'); /* Replace with the path to your image */
+    background-image: url('/assets/images/trawler_compressed.jpg'); /* Replace with the path to your image */
     height: 500px; /* Adjust height as needed */
     background-attachment: fixed;
     background-size: cover;
