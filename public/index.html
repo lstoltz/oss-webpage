@@ -5,33 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ocean Science Solutions</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="assets/src/logo.png" type="image/png">
 </head>
 <body>
-    <!-- Video background container -->
+    <div class="top-bar">
+        <div class="company-name">Ocean Science Solutions</div>
+    </div>
+    
     <div class="video-container">
         <video autoplay muted loop>
-            <source src="assets/video/clip_1.mp4" type="video/mp4">
+            <source src="assets/video/clip.mp4" type="video/mp4">
             Your browser does not support HTML5 video.
         </video>
     </div>
 
-    <!-- Header Text Overlay -->
-    <div class="overlay-text">
-        <h1>Ocean Science Solutions</h1>
-    </div>
-
-    <!-- Content overlay on video -->
     <div class="content">
         <h1>Unlock the depths of your data</h1>
-        <p>This is a single-page site with a parallax video background.</p>
-        <p>Scroll down for more content.</p>
     </div>
 
-    <!-- Additional content section to scroll over the video -->
     <div class="section">
-        <h2>More Information</h2>
-        <p>Here you can add additional information, services, or contact details.</p>
+        <h2>We specialize in data management and custom automated solutions to bring data to the forefront of decision making.</h2>
     </div>
+    
+    <div class="parallax">
+        <div class="email-box">
+            <h2>Contact Us</h2>
+            <form id="contact-form" action="https://formsubmit.co/info@oceanscientific.net" method="POST">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+                
+                <button type="submit">Send</button>
+                
+            </form>
+        </div>
+    </div>
+    <script>
+        window.onload = function() {
+            // Get the form element
+            const form = document.getElementById("contact-form");
 
+            form.addEventListener("submit", function(event) {
+                // Show a success alert before form is actually submitted
+                event.preventDefault();  // Prevent form from submitting immediately
+    
+                // Trigger success alert
+                alert("Thank you for your message! We will respond shortly.");
+    
+                // Now, submit the form after the alert
+                form.submit();  // Continue submitting the form to FormSubmit
+            });
+        };
+    </script>
 </body>
 </html>
