@@ -6,61 +6,102 @@
     <title>Ocean Science Solutions</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="icon" href="assets/src/logo.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="top-bar">
-        <div class="company-name">Ocean Science Solutions</div>
-    </div>
+    <nav class="top-bar">
+        <div class="nav-inner">
+            <div class="company-name">Ocean Science Solutions</div>
+            <a href="#contact" class="nav-cta">Get in Touch</a>
+        </div>
+    </nav>
 
-    <div class="video-container">
-        <video autoplay muted loop>
-            <source src="assets/video/clip_compressed.mp4" type="video/mp4">
-            Your browser does not support HTML5 video.
-        </video>
-    </div>
+    <section class="hero">
+        <div class="video-container">
+            <video autoplay muted loop playsinline>
+                <source src="assets/video/clip_compressed.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+            </video>
+            <div class="video-overlay"></div>
+        </div>
 
-    <div class="content">
-        <h1>Unlock the depths of your data</h1>
-    </div>
+        <div class="hero-content">
+            <h1 class="fade-up">Unlock the depths<br>of your data</h1>
+            <p class="fade-up delay-1">We specialize in data management and custom automated solutions to bring data to the forefront of decision making.</p>
+            <a href="#contact" class="hero-btn fade-up delay-2">Contact Us &darr;</a>
+        </div>
+    </section>
 
-    <div class="section">
-        <h2>We specialize in data management and custom automated solutions to bring data to the forefront of decision making.</h2>
-    </div>
-    
-    <div class="parallax">
+    <section id="contact" class="parallax">
+        <div class="parallax-overlay"></div>
         <div class="email-box">
-            <h2>Contact Us</h2>
+            <h2>Let's Connect</h2>
+            <p class="form-subtitle">Have a project in mind? We'd love to hear from you.</p>
             <form id="contact-form" action="https://formsubmit.co/info@oceanscientific.net" method="POST">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
-                
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
-                
-                <label for="message">Message:</label>
-                <textarea id="message" name="message" rows="4" required></textarea>
-                
-                <button type="submit">Send</button>
-                
+                <div class="form-group">
+                    <input type="text" id="name" name="name" placeholder=" " required>
+                    <label for="name">Name</label>
+                </div>
+
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder=" " required>
+                    <label for="email">Email</label>
+                </div>
+
+                <div class="form-group">
+                    <textarea id="message" name="message" rows="4" placeholder=" " required></textarea>
+                    <label for="message">Message</label>
+                </div>
+
+                <button type="submit">
+                    <span>Send Message</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
             </form>
         </div>
-    </div>
-    <script>
-        window.onload = function() {
-            // Get the form element
-            const form = document.getElementById("contact-form");
+    </section>
 
+    <footer class="site-footer">
+        <p>&copy; 2026 Ocean Science Solutions. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Navbar background on scroll
+        const nav = document.querySelector('.top-bar');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Fade-up animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+        // Contact form
+        window.onload = function() {
+            const form = document.getElementById("contact-form");
             form.addEventListener("submit", function(event) {
-                // Show a success alert before form is actually submitted
-                event.preventDefault();  // Prevent form from submitting immediately
-    
-                // Trigger success alert
+                event.preventDefault();
                 alert("Thank you for your message! We will respond shortly.");
-    
-                // Now, submit the form after the alert
-                form.submit();  // Continue submitting the form to FormSubmit
+                form.submit();
             });
         };
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
     </script>
 </body>
 </html>
