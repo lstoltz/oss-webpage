@@ -1,3 +1,2 @@
 # webpage
-
-To test locally `python -m http.server`
+webpage for OSS
