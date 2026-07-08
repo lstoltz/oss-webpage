@@ -107,29 +107,22 @@
         <section id="contact" class="parallax" aria-label="Contact Us">
         <div class="parallax-overlay"></div>
         <div class="email-box">
-            <h2>Let's Connect</h2>
-            <p class="form-subtitle">Need a solution? We'd love to hear from you.</p>
-            <form id="contact-form" action="https://formsubmit.co/info@oceanscientific.net" method="POST">
-                <div class="form-group">
-                    <input type="text" id="name" name="name" placeholder=" " required>
-                    <label for="name">Name</label>
+            <h2>Need a solution?</h2>
+            <p class="form-subtitle">Send us an email to connect.</p>
+            <div class="email-actions">
+                <div class="email-copy-row">
+                    <span id="contact-email" class="email-address" tabindex="0">info@oceanscientific.net</span>
+                    <button class="copy-email" type="button" data-copy-email="info@oceanscientific.net" aria-label="Copy email address">
+                        <span>Copy</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                    </button>
                 </div>
-
-                <div class="form-group">
-                    <input type="email" id="email" name="email" placeholder=" " required>
-                    <label for="email">Email</label>
-                </div>
-
-                <div class="form-group">
-                    <textarea id="message" name="message" rows="4" placeholder=" " required></textarea>
-                    <label for="message">Message</label>
-                </div>
-
-                <button type="submit">
-                    <span>Send Message</span>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-                </button>
-            </form>
+                <p class="copy-status" id="copy-status" aria-live="polite"></p>
+                <a class="email-cta" href="mailto:info@oceanscientific.net">
+                    <span>Open in email client</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
+                </a>
+            </div>
         </div>
     </section>
     </main>
@@ -156,15 +149,44 @@
 
         document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-        // Contact form
-        window.onload = function() {
-            const form = document.getElementById("contact-form");
-            form.addEventListener("submit", function(event) {
-                event.preventDefault();
-                alert("Thank you for your message! We will respond shortly.");
-                form.submit();
+        const copyEmailButton = document.querySelector('[data-copy-email]');
+        const copyStatus = document.getElementById('copy-status');
+        const emailText = document.getElementById('contact-email');
+
+        if (copyEmailButton && copyStatus && emailText) {
+            copyEmailButton.addEventListener('click', async () => {
+                const email = copyEmailButton.dataset.copyEmail;
+
+                try {
+                    if (navigator.clipboard && window.isSecureContext) {
+                        await navigator.clipboard.writeText(email);
+                    } else {
+                        const selection = window.getSelection();
+                        const range = document.createRange();
+                        range.selectNodeContents(emailText);
+                        selection.removeAllRanges();
+                        selection.addRange(range);
+
+                        if (!document.execCommand('copy')) {
+                            throw new Error('Copy command failed');
+                        }
+
+                        selection.removeAllRanges();
+                    }
+
+                    copyStatus.textContent = 'Copied to clipboard';
+                    copyEmailButton.classList.add('copied');
+                } catch (error) {
+                    copyStatus.textContent = 'Select and copy the email address above';
+                    emailText.focus();
+                }
+
+                window.setTimeout(() => {
+                    copyStatus.textContent = '';
+                    copyEmailButton.classList.remove('copied');
+                }, 2400);
             });
-        };
+        }
 
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
